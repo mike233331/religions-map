@@ -17,22 +17,33 @@ class Church(Base):
     country_id = Column(Integer, ForeignKey("country.id"))
     religion_id = Column(Integer, ForeignKey("religion.id"))
 
-    # country = relationship("Country", back_populates="churchs")
-    # religion = relationship("religion", back_populates="churchs")
+    country = relationship("Country", back_populates="church")
+    religion = relationship("Country", back_populates="church")
 
+# class Parent(Base):
+#     __tablename__ = 'parent'
+#     id = Column(Integer, primary_key=True)
+#     children = relationship("Child", back_populates="parent")
+#
+# class Child(Base):
+#     __tablename__ = 'child'
+#     id = Column(Integer, primary_key=True)
+#     parent_id = Column(Integer, ForeignKey('parent.id'))
+#     parent = relationship("Parent", back_populates="children")
 
 class Country(Base):
     __tablename__ = "country"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    churchs = relationship("church", back_populates="church")
+    churchs = relationship("Country", back_populates="country")
 
 
 class Religion(Base):
     __tablename__ = "religion"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    churchs = relationship("church", back_populates="church")
+    churchs = relationship("Country", back_populates="religion")
+
 
 
 engine = create_engine("sqlite:///../data/religion_01.db", echo = True)
