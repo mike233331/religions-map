@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship, Session
 class Base(DeclarativeBase): pass
 
 
+
 class Church(Base):
     __tablename__ = "church"
     id = Column(Integer, primary_key=True, index=True)
@@ -60,6 +61,7 @@ with Session(autoflush=False, bind=engine) as db:
     African_traditional_religions = Religion(name="African traditional religions")
     print("with Session: ", db)
     db.commit()
+
 print("db: ", db)
 
 # with Session(autoflush=False, bind=engine) as db:
